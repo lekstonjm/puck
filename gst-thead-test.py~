@@ -4,14 +4,14 @@ import time
 import gi
 gi.require_version("Gst","1.0")
 from gi.repository import Gst, GLib
-current_sound_location = "/usr/share/sounds/puck/cloche_F3.mp3"
+current_sound_location = "/usr/share/sounds/Front_Center.wav"
 
 class Sound(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
 
     def run(self):
-        gst_string = "filesrc name=source location=" + self.current_sound_location + " ! mad ! audioconvert ! alsasink"
+        gst_string = "filesrc name=source location=" + self.current_sound_location + " ! alsasink"
         self.player = Gst.parse_launch(gst_string)
         bus = self.player.get_bus()
         bus.add_signal_watch()
